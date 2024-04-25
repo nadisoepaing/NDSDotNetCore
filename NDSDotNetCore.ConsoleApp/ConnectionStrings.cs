@@ -16,6 +16,7 @@ namespace NDSDotNetCore.ConsoleApp
             InitialCatalog = "NDSDotNetCore",
             UserID = "sa",
             Password = "sa@123",
+            TrustServerCertificate = true,
 
         };
     }
