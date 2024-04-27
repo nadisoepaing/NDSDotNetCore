@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NDSDotNetCore.ConsoleApp
+namespace NDSDotNetCore.ConsoleApp.Services
 {
     internal class ConnectionStrings
     {
 
-        public static SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder() 
-        { 
+        public static SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder()
+        {
             DataSource = "NADI",
             InitialCatalog = "NDSDotNetCore",
             UserID = "sa",

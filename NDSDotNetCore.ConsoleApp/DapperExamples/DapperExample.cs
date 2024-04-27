@@ -7,12 +7,14 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using Dapper;
+using NDSDotNetCore.ConsoleApp.Dtos;
+using NDSDotNetCore.ConsoleApp.Services;
 
-namespace NDSDotNetCore.ConsoleApp
+namespace NDSDotNetCore.ConsoleApp.DapperExamples
 {
     internal class DapperExample
     {
-        
+
 
         public void Run()
         {
@@ -26,11 +28,11 @@ namespace NDSDotNetCore.ConsoleApp
         }
 
         public void Read()
-        { 
+        {
             using IDbConnection db = new SqlConnection(ConnectionStrings.sqlConnectionStringBuilder.ConnectionString);
-           List<BlogDto> lst = db.Query<BlogDto>("select * from tbl_blog").ToList();
+            List<BlogDto> lst = db.Query<BlogDto>("select * from tbl_blog").ToList();
 
-            foreach(BlogDto item in lst)
+            foreach (BlogDto item in lst)
             {
                 Console.WriteLine(item.BlogId);
                 Console.WriteLine(item.BlogTitle);
@@ -44,8 +46,8 @@ namespace NDSDotNetCore.ConsoleApp
         private void Edit(int id)
         {
             using IDbConnection db = new SqlConnection(ConnectionStrings.sqlConnectionStringBuilder.ConnectionString);
-            var item = db.Query<BlogDto>("select * from tbl_blog where blogid = @BlogId",new BlogDto { BlogId = id }).FirstOrDefault();
-          // if(item == null)
+            var item = db.Query<BlogDto>("select * from tbl_blog where blogid = @BlogId", new BlogDto { BlogId = id }).FirstOrDefault();
+            // if(item == null)
             if (item is null)
             {
                 Console.WriteLine("No data found");
@@ -58,7 +60,7 @@ namespace NDSDotNetCore.ConsoleApp
             Console.WriteLine(item.BlogContent);
         }
 
-        private void Create(string title, String author , string content)
+        private void Create(string title, string author, string content)
         {
             var item = new BlogDto
             {
@@ -82,7 +84,7 @@ namespace NDSDotNetCore.ConsoleApp
             Console.WriteLine(message);
         }
 
-        private void Update(int id, string title, String author, String content)
+        private void Update(int id, string title, string author, string content)
         {
             var item = new BlogDto
             {
@@ -109,7 +111,7 @@ namespace NDSDotNetCore.ConsoleApp
             var item = new BlogDto
             {
                 BlogId = id,
-                
+
             };
             string query = @"Delete From [dbo].[Tbl_Blog] WHERE BlogId = @Blogid";
 
